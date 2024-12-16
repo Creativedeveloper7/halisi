@@ -1,2 +1,10 @@
-dist
+# Visual Studio specific files
+*.user
+*.suo
+*.csproj.user
+*.dbmdl
+*.jfm
+/bin/
+/obj/
+*.log
 node_modules

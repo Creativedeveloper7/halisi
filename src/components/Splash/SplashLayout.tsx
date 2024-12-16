@@ -15,7 +15,7 @@ export function SplashLayout({ children }: SplashLayoutProps) {
         transition={{ duration: 1 }}
       >
         <img
-          src="/images/splash screen.jpg"
+          src="/images/splashscreen.png"
           alt="Background"
           className="w-full h-full object-cover brightness-50"
         />

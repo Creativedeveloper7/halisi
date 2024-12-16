@@ -10,7 +10,7 @@
 /* Root styles for custom properties */
 :root {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
   line-height: 1.5;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -38,3 +38,8 @@ color: rgb(255, 255, 255);
     opacity: 0.3; /* Set the opacity to 30% */
     z-index: -1; /* Makes sure the image is behind the content */
   }
+
+
+
+
+
