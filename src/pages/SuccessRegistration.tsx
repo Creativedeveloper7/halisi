@@ -7,11 +7,11 @@ export function SuccessRegistration() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-black-50 flex flex-col items-center justify-center p-4">
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center"
+        className="bg-orange p-8 rounded-lg shadow-lg max-w-md w-full text-center"
       >
         <motion.div
           initial={{ scale: 0 }}

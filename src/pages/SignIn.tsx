@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import { AuthLayout } from '../components/auth/AuthLayout';
 import { AuthInput } from '../components/auth/AuthInput';
 import { SocialAuth } from '../components/auth/SocialAuth';
@@ -13,10 +15,28 @@ export function SignIn() {
     email: '',
     password: '',
   });
+  const [error, setError] = useState<string | null>(null);
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Sign in:', formData);
+    setError(null);
+
+    try {
+      const { user, error } = await signIn(formData.email, formData.password);
+
+      if (error) {
+        setError(error);
+        return;
+      }
+
+      if (user) {
+        navigate('/welcome');
+      }
+    } catch (err) {
+      setError('An unexpected error occurred');
+    }
   };
 
   return (
@@ -25,7 +45,8 @@ export function SignIn() {
       title="Welcome back!"
       subtitle="Sign in to continue your journey"
     >
-   
+      <Logo />
+      {error && <div className="text-red-500 mb-4">{error}</div>}
       <form onSubmit={handleSubmit} className="space-y-6">
         <AuthInput
           label="Email address"
@@ -35,9 +56,6 @@ export function SignIn() {
           onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))}
           required
         />
-
-
-        
         <AuthInput
           label="Password"
           type="password"
@@ -56,7 +74,7 @@ export function SignIn() {
         onFacebookClick={() => console.log('Facebook sign in')}
       />
 
-      <AuthFooter 
+      <AuthFooter
         text="Don't have an account?"
         linkText="Sign up"
         linkTo="/signup"

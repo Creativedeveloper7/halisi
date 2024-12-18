@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import { AuthLayout } from '../components/auth/AuthLayout';
 import { AuthInput } from '../components/auth/AuthInput';
 import { SocialAuth } from '../components/auth/SocialAuth';
@@ -14,19 +16,42 @@ export function SignUp() {
     email: '',
     password: '',
   });
+  const [error, setError] = useState<string | null>(null);
+  const { signUp } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Sign up:', formData);
+    setError(null);
+
+    try {
+      const { user, error } = await signUp(
+        formData.email, 
+        formData.password, 
+        formData.fullName || ''
+      );
+
+      if (error) {
+        setError(error);
+        return;
+      }
+
+      if (user) {
+        navigate('/success-registration');
+      }
+    } catch (err) {
+      setError('An unexpected error occurred');
+    }
   };
 
   return (
     <AuthLayout
-      image="/images/auth-image.jpg"
+      image="/images/sign up.png"
       title="Welcome to Halisi"
       subtitle="Your Journey Begins Here!"
     >
       <Logo />
+      {error && <div className="text-red-500 mb-4">{error}</div>}
       <form onSubmit={handleSubmit} className="space-y-6">
         <AuthInput
           label="Full name"
