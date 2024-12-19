@@ -17,7 +17,7 @@ export function Welcome() {
       {/* Full-screen background image */}
       <div className="relative h-screen">
         <img
-          src="/images/welcome.jpg" // Path to your background image
+          src="/images/welcome.png" // Path to your background image
           alt="Welcome"
           className="w-full h-full object-cover"
         />
@@ -41,7 +41,7 @@ export function Welcome() {
               {/* Buttons */}
               <div className="flex gap-4">
                 <Button
-                  onClick={() => navigate('/dashboard')}
+                  onClick={() => navigate('/homepage')}
                   className="bg-orange-500 hover:bg-orange-600"
                 >
                   Start Exploring
