@@ -20,7 +20,7 @@ export function BottomNavigation() {
   const location = useLocation();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
+    <nav className="fixed bottom-0 left-0 right-0 bg-transparent border-t border-gray-900">
       <div className="flex justify-around items-center h-16 max-w-lg mx-auto">
         {navItems.map(({ path, label, icon: Icon }) => (
           <Link
@@ -31,7 +31,7 @@ export function BottomNavigation() {
               'transition-colors duration-200',
               location.pathname === path 
                 ? 'text-orange-500' 
-                : 'text-gray-500 hover:text-orange-500'
+                : 'text-white-500 hover:text-orange-500'
             )}
           >
             <Icon className="w-6 h-6" />

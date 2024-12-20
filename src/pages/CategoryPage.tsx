@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { SearchBar } from '../components/home/SearchBar';
 import { ShopCard } from '../components/shop/ShopCard';
 import { BottomNavigation } from '../components/layout/BottomNavigation';
-import { mockShops } from '../data/mockData';
+import { mockShops } from '../data/MockData';
 import { motion } from 'framer-motion';
 
 const container = {

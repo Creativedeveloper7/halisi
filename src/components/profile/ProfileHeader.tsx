@@ -10,7 +10,7 @@ export function ProfileHeader({ user }: ProfileHeaderProps) {
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white p-6 rounded-lg shadow-sm text-center"
+      className="bg-transparent p-6 rounded-lg shadow-sm text-center"
     >
       <div className="w-24 h-24 mx-auto mb-4 relative">
         <img
@@ -19,7 +19,7 @@ export function ProfileHeader({ user }: ProfileHeaderProps) {
           className="w-full h-full rounded-full object-cover"
         />
       </div>
-      <h2 className="text-xl font-semibold text-gray-900">{user.fullName}</h2>
+      <h2 className="text-xl font-semibold text-gray-200">{user.fullName}</h2>
       <p className="text-gray-500">{user.email}</p>
       <p className="text-sm text-gray-400 mt-1">Member since {new Date(user.createdAt).toLocaleDateString()}</p>
     </motion.div>
