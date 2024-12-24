@@ -31,5 +31,5 @@
     "typescript": "^5.0.2",
     "vite": "^4.4.0"
   },
-  "bin": "server.js"  // Specify your entry point here
+  "bin": "server.js"
 }

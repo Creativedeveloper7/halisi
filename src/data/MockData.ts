@@ -20,7 +20,7 @@ export const categories = [
   {
     id: 'services',
     title: 'Services',
-    image: '/images/african clothes.png',
+    image: '/images/SERVICES 2.jpg',
     path: '/category/services',
   },
 ];
@@ -29,7 +29,7 @@ export const mockShops = [
   {
     id: '1',
     name: 'Tribe Africa',
-    image: '/images/shops/tribe africa.png',
+    image: '/images/shops/tribeafrica.png',
     category: 'African Clothing',
     rating: 4.8,
     location: 'Nairobi, Kenya',
@@ -37,17 +37,60 @@ export const mockShops = [
   {
     id: '2',
     name: 'Fits on Time',
-    image: '/images/shops/fits-on-time.jpg',
+    image: '/images/shops/suit.jpg',
     category: 'African Clothing',
     rating: 4.6,
     location: 'Lagos, Nigeria',
   },
   {
     id: '3',
-    name: 'African Artistry',
-    image: '/images/shops/african-artistry.jpg',
+    name: 'Safari Hat',
+    image: '/images/shops/safarihats.jpg',
     category: 'Art & Crafts',
     rating: 4.9,
     location: 'Accra, Ghana',
+  },
+  {
+    id: '3',
+    name: 'Celes Qloset',
+    image: '/images/shops/beads.jpg',
+    category: 'Art & Crafts',
+    rating: 4.9,
+    location: 'Accra, Ghana',
+  },
+
+  {
+    id: '3',
+    name: 'Afrian Cuisine',
+    image: '/images/shops/FOOD.jpg',
+    category: 'African Foods',
+    rating: 4.9,
+    location: 'Accra, Ghana',
+  },
+  {
+    id: '3',
+    name: 'Samaki Samaki',
+    image: '/images/shops/Chef.jpg',
+    category: 'African foods',
+    rating: 4.9,
+    location: 'Accra, Ghana',
+  },
+  {
+    id: '3',
+    name: 'Mara Nomads',
+    image: '/images/shops/tourguide.jpg',
+    category: 'Services',
+    rating: 4.9,
+    location: 'Accra, Ghana',
+
+  },
+  {
+    id: '3',
+    name: 'Mwafrika Pictures',
+    image: '/images/shops/photographer.jpg',
+    category: 'Services',
+    rating: 4.9,
+    location: 'Accra, Ghana',
+    
   },
 ];

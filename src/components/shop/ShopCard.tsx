@@ -7,7 +7,7 @@ interface ShopCardProps {
   
   export function ShopCard({ name, image, rating, category }: ShopCardProps) {
     return (
-      <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+      <div className="bg-gray rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
         <div className="aspect-square">
           <img src={image} alt={name} className="w-full h-full object-cover" />
         </div>
