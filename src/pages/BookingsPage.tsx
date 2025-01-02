@@ -1,47 +1,63 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { EmptyBookings } from '../components/bookings/EmptyBookings';
 import { BookingCard } from '../components/bookings/BookingCard';
-import { BottomNavigation } from '../components/layout/BottomNavigation';
-import { Booking } from '../types/booking';
+import { EmptyState } from '../components/common/EmptyState';
+import { useOrders } from '../hooks/useOrders';
 
 export function BookingsPage() {
-  const [bookings] = useState<Booking[]>([]);
+  const { orders, cancelOrder } = useOrders();
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const handleRefresh = () => {
+    setRefreshKey(prev => prev + 1);
+  };
+
+  const handleCancel = async (orderId: string) => {
+    await cancelOrder(orderId);
+  };
 
   return (
-    <div className="min-h-screen bg-transparent-50 pb-20">
+    <div className="min-h-screen bg-gray-50 pb-20">
       <div className="container mx-auto px-4 py-6">
-        <motion.h1 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-2xl font-bold mb-6"
-        >
-          My Bookings
-        </motion.h1>
+        <div className="flex justify-between items-center mb-6">
+          <motion.h1 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-2xl font-bold"
+          >
+            My Bookings
+          </motion.h1>
+          <button
+            onClick={handleRefresh}
+            className="text-orange-500 hover:text-orange-600"
+          >
+            Refresh
+          </button>
+        </div>
 
-        <AnimatePresence>
-          {bookings.length === 0 ? (
-            <EmptyBookings />
+        <AnimatePresence mode="wait" key={refreshKey}>
+          {orders.length === 0 ? (
+            <EmptyState
+              icon="shopping"
+              title="No bookings yet"
+              description="Your bookings will appear here"
+            />
           ) : (
             <motion.div 
               layout
               className="space-y-4"
             >
-              {bookings.map((booking) => (
+              {orders.map((order) => (
                 <BookingCard
-                  key={booking.id}
-                  shopName={booking.shopName}
-                  date={booking.date}
-                  status={booking.status}
-                  image={booking.image}
+                  key={order.id}
+                  order={order}
+                  onCancel={() => handleCancel(order.id)}
                 />
               ))}
             </motion.div>
           )}
         </AnimatePresence>
       </div>
-      
-      <BottomNavigation />
     </div>
   );
 }

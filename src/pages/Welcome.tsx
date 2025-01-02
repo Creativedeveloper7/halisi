@@ -13,35 +13,29 @@ export function Welcome() {
   };
 
   return (
-    <div className="min-h-screen">
-      {/* Full-screen background image */}
+    <div className="min-h-screen bg-gray-50">
       <div className="relative h-screen">
         <img
-          src="/images/welcome.png" // Path to your background image
+          src="/images/welcome-bg.jpg"
           alt="Welcome"
           className="w-full h-full object-cover"
         />
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="container mx-auto px-4">
+        <div className="absolute inset-0 bg-black bg-opacity-50">
+          <div className="container mx-auto px-4 h-full flex flex-col justify-center items-start">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-white max-w-2xl"
             >
-              {/* Welcome Message */}
               <h1 className="text-4xl md:text-6xl font-bold mb-4">
                 Welcome, <span className="text-orange-500">{user?.fullName}</span>
               </h1>
               <p className="text-xl md:text-2xl mb-8">
                 Your African Best Experience Begins Here!
               </p>
-
-              {/* Buttons */}
               <div className="flex gap-4">
                 <Button
-                  onClick={() => navigate('/homepage')}
+                  onClick={() => navigate('/dashboard')}
                   className="bg-orange-500 hover:bg-orange-600"
                 >
                   Start Exploring

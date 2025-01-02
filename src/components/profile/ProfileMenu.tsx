@@ -1,11 +1,13 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { 
   UserIcon, 
   BellIcon, 
   ShieldCheckIcon,
   CreditCardIcon,
   QuestionMarkCircleIcon,
-  ArrowRightOnRectangleIcon
+  ArrowRightOnRectangleIcon,
+  ShoppingBagIcon
 } from '@heroicons/react/24/outline';
 
 interface ProfileMenuItem {
@@ -19,6 +21,8 @@ interface ProfileMenuProps {
 }
 
 export function ProfileMenu({ onSignOut }: ProfileMenuProps) {
+  const navigate = useNavigate();
+
   const menuItems: ProfileMenuItem[] = [
     {
       icon: UserIcon,
@@ -26,9 +30,14 @@ export function ProfileMenu({ onSignOut }: ProfileMenuProps) {
       onClick: () => console.log('Edit Profile')
     },
     {
+      icon: ShoppingBagIcon,
+      label: 'Become a Seller',
+      onClick: () => navigate('/seller/onboarding')
+    },
+    {
       icon: BellIcon,
       label: 'Notifications',
-      onClick: () => console.log('Notifications')
+      onClick: () => navigate('/notifications')
     },
     {
       icon: ShieldCheckIcon,
@@ -56,7 +65,7 @@ export function ProfileMenu({ onSignOut }: ProfileMenuProps) {
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="bg-transparent rounded-lg shadow-sm mt-4"
+      className="bg-white rounded-lg shadow-sm mt-4"
     >
       {menuItems.map((item, index) => (
         <motion.button
@@ -67,8 +76,8 @@ export function ProfileMenu({ onSignOut }: ProfileMenuProps) {
           onClick={item.onClick}
           className="w-full flex items-center gap-4 p-4 hover:bg-gray-50 transition-colors"
         >
-          <item.icon className="w-6 h-6 text-gray-100" />
-          <span className="text-gray-200">{item.label}</span>
+          <item.icon className="w-6 h-6 text-gray-500" />
+          <span className="text-gray-700">{item.label}</span>
         </motion.button>
       ))}
     </motion.div>
