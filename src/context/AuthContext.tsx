@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 import { supabase } from '../lib/supabase';
 import { AuthContextType, User, AuthResponse } from '../types/auth';
 import { signInSchema, signUpSchema } from '../utils/validation';
+import { toast } from 'react-hot-toast';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -14,7 +15,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
         setUser({
-          id: session.user.id, // This will be a UUID
+          id: session.user.id,
           email: session.user.email!,
           fullName: session.user.user_metadata.full_name || '',
           createdAt: session.user.created_at,
@@ -58,7 +59,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       });
 
       if (error) {
-        return { user: null, error: error.message };
+        // Log the actual error for debugging
+        console.error('Sign in error:', error);
+        
+        // Provide a more user-friendly error message
+        return { 
+          user: null, 
+          error: 'Invalid email or password. Please try again.' 
+        };
       }
 
       const user: User = {
@@ -70,7 +78,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       return { user, error: null };
     } catch (error) {
-      return { user: null, error: 'An error occurred during sign in' };
+      console.error('Unexpected error during sign in:', error);
+      return { 
+        user: null, 
+        error: 'An unexpected error occurred. Please try again.' 
+      };
     }
   };
 
@@ -91,29 +103,49 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           data: {
             full_name: fullName,
           },
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
         },
       });
 
       if (error) {
+        console.error('Sign up error:', error);
         return { user: null, error: error.message };
       }
 
-      const user: User = {
-        id: data.user!.id,
-        email: data.user!.email!,
-        fullName,
-        createdAt: data.user!.created_at,
-      };
+      // Show success message even if email confirmation is required
+      toast.success('Account created successfully!');
 
-      return { user, error: null };
+      if (data.user) {
+        const user: User = {
+          id: data.user.id,
+          email: data.user.email!,
+          fullName,
+          createdAt: data.user.created_at,
+        };
+        return { user, error: null };
+      }
+
+      return { 
+        user: null, 
+        error: 'Please check your email to confirm your account.' 
+      };
     } catch (error) {
-      return { user: null, error: 'An error occurred during sign up' };
+      console.error('Unexpected error during sign up:', error);
+      return { 
+        user: null, 
+        error: 'An unexpected error occurred. Please try again.' 
+      };
     }
   };
 
   const signOut = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
+    try {
+      await supabase.auth.signOut();
+      setUser(null);
+    } catch (error) {
+      console.error('Error signing out:', error);
+      toast.error('Error signing out. Please try again.');
+    }
   };
 
   return (
